@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "882411311950",
+    "firebase_url": "https://share-your-job-3dfdf.firebaseio.com",
+    "project_id": "share-your-job-3dfdf",
+    "storage_bucket": "share-your-job-3dfdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882411311950:android:35f9810ddb4af10eb5441f",
+        "android_client_info": {
+          "package_name": "com.js.jobshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882411311950-pv6ve5mqv3cpucb6rhapcumetd0059d1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.js.jobshare",
+            "certificate_hash": "bfba04f56490811c53c1feb387001741fb4521fd"
+          }
+        },
+        {
+          "client_id": "882411311950-e63dbn856squuiqjt2t792gok52d5sso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrlqhGusMsC3VpIc55d50Hj9SEn_PpkD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882411311950-e63dbn856squuiqjt2t792gok52d5sso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

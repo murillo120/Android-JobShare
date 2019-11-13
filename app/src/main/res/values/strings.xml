@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">JobShare</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_user">Bem-vindo, %1$s</string>
+    <string name="edite_seus_dados_de_Perfil">Atualize seus dados de perfil:</string>
+    <string name="edite_seus_dados_de_Perfil_pessoal">Pessoal: </string>
+    <string name="edite_seus_dados_de_Perfil_endereco">Endereço: </string>
+    <string name="btn_register_text">Registrar</string>
+    <string name="btn_login_text">login</string>
+    <string name="btn_salvar_text">Salvar</string>
+</resources>
