@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,36 +12,37 @@ import com.google.firebase.auth.FirebaseAuth
 import com.js.jobshare.R
 import com.js.jobshare.adapters.PageAdapter
 import com.js.jobshare.fragments.AlertDialogFrag
+import com.js.jobshare.fragments.DataThorughInferface
 import com.js.jobshare.models.User
 import com.js.jobshare.viewmodels.ViewModelMain
 import kotlinx.android.synthetic.main.home_activity.*
 
-class Home_activity : AppCompatActivity(){
+class Home_activity : AppCompatActivity() {
 
     val viewmodel = ViewModelMain()
     val context = this
+    var userinfo : DataThorughInferface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
-
-        
         viewmodel.user.observe(this, object : Observer<User> {
             override fun onChanged(user: User?) {
-                home_username.text = getString(R.string.hello_user,user?.name)
+                home_username.text = getString(R.string.hello_user, user?.name)
 
-                if (user?.adress == null){
+                if (user?.adress == null) {
 
                     AlertDialog.Builder(context)
-                        .setTitle("Importante!")
-                        .setMessage("Você precisa atualizar suas informações pessoais!")
-                        .setNeutralButton("atualizar", object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                home_view_pager.currentItem = 1
-                            }
-                        })
-                        .show()
+                            .setTitle("Importante!")
+                            .setMessage("Você precisa atualizar suas informações pessoais!")
+                            .setNeutralButton("atualizar", object : DialogInterface.OnClickListener {
+                                override fun onClick(dialog: DialogInterface?, which: Int) {
+                                    home_view_pager.currentItem = 1
+                                    userinfo?.setUserData(user)
+                                }
+                            })
+                            .show()
                 }
 
             }
@@ -58,7 +60,7 @@ class Home_activity : AppCompatActivity(){
         home_tab_layout.getTabAt(1)?.setIcon(R.drawable.user)
         home_tab_layout.getTabAt(0)?.setText("Feed")
         home_tab_layout.getTabAt(1)?.setText("Profile")
-        Log.d("abacaxi",home_tab_layout.tabCount.toString())
+        Log.d("abacaxi", home_tab_layout.tabCount.toString())
 
         home_logout_button.setOnClickListener {
 
@@ -71,11 +73,17 @@ class Home_activity : AppCompatActivity(){
         init()
     }
 
-    fun init(){
+    fun init() {
 
         val userdata = intent.getStringExtra("userdata")
 
         viewmodel.getUserdata(userdata)
+    }
+
+    fun passData(userData: DataThorughInferface){
+
+        this.userinfo = userData
+
     }
 
 }
