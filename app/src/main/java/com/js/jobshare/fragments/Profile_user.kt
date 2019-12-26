@@ -25,7 +25,6 @@ class profile_user : Fragment() {
                 if (updateprofile_edit_phone.text.toString().isEmpty()){
                     updateprofile_edit_phone.setError("")
                 }
-
                 updateprofile_edit_idade.setText(user?.idade)
                 updateprofile_edit_email.setText(user?.email)
                 updateprofile_edit_cargo.setText(user?.cargo)
