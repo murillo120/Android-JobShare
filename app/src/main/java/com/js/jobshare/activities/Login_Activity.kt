@@ -1,7 +1,9 @@
 package com.js.jobshare.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -11,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.js.jobshare.R
 import com.js.jobshare.viewmodels.ViewModelMain
 import kotlinx.android.synthetic.main.login_activity.*
+
 
 class Login_Activity : AppCompatActivity() {
 
@@ -29,25 +32,33 @@ class Login_Activity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
 
-        viewmodel.login_key.observe(this, object : Observer<Boolean> {
+        viewmodel.login_key.observe(this, Observer<Boolean> { t ->
+            if (t!!) {
+                val intent = Intent(context, Home_activity::class.java)
+                intent.putExtra("userdata",edit_reg_userEmail.text.toString())
+                login_progressbar.visibility = View.GONE
 
-            override fun onChanged(t: Boolean?) {
+                val sharedPreference =  getSharedPreferences("JobShare_id",Context.MODE_PRIVATE)
+                val editor = sharedPreference.edit()
 
-                if (t!!) {
-                    val intent = Intent(context, Home_activity::class.java)
-                    intent.putExtra("userdata",edit_reg_userEmail.text.toString())
-                    login_progressbar.visibility = View.GONE
-                    startActivity(intent)
-                    finish()
-                } else {
+                val email = edit_reg_userEmail.text.toString()
+                val password = edit_reg_PassWord.text.toString()
 
-                    Toast.makeText(context, viewmodel.exception, Toast.LENGTH_SHORT).show()
-                    login_progressbar.visibility = View.GONE
+                editor.putString("username",email)
+                editor.putString("password",password)
+                editor.apply()
+
+                Log.d("abacaxi", "data saved on shared prefs")
+
+                startActivity(intent)
+                finish()
+            } else {
+
+                Toast.makeText(context, viewmodel.exception, Toast.LENGTH_SHORT).show()
+                login_progressbar.visibility = View.GONE
 
 
-                }
             }
-
         })
 
         login_progressbar.visibility = View.GONE

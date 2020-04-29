@@ -1,6 +1,5 @@
 package com.js.jobshare.fragments
 
-
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,10 +13,6 @@ class FeedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,21 +31,30 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (test.maxLines >= 4) {
-            tv_pessoal_lermais.setOnClickListener {
-                Log.d("abacaxi", "joga esse rabetao")
-                Log.d("abacaxi", test.maxLines.toString())
-                Log.d("abacaxi", test.lineCount.toString())
-                if (test.maxLines <= 4) {
-                    test.setLines(test.lineCount)
 
-                    tv_pessoal_lermais.text = "ler menos"
-                } else {
-                    test.setLines(4)
-                    tv_pessoal_lermais.text = "ler mais"
-                    test.text = "${test.text}..."
-                }
-            }
-        }
+
+
+
+
+
+
+
+
+//        if (test.maxLines >= 4) {
+//            tv_pessoal_lermais.setOnClickListener {
+//                Log.d("abacaxi", "joga esse rabetao")
+//                Log.d("abacaxi", test.maxLines.toString())
+//                Log.d("abacaxi", test.lineCount.toString())
+//                if (test.maxLines <= 4) {
+//                    test.setLines(test.lineCount)
+//
+//                    tv_pessoal_lermais.text = "ler menos"
+//                } else {
+//                    test.setLines(4)
+//                    tv_pessoal_lermais.text = "ler mais"
+//                    test.text = "${test.text}..."
+//                }
+//            }
+//        }
     }
 }

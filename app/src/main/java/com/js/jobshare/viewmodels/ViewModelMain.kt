@@ -36,7 +36,8 @@ class ViewModelMain : ViewModel() {
 
     fun executeRegisterOnApplication(user: User) {
 
-        authentication.createUserWithEmailAndPassword(user.email, user.password).addOnCompleteListener { task ->
+        authentication.createUserWithEmailAndPassword(user.email, user.password)
+                .addOnCompleteListener { task ->
 
             if (task.isSuccessful) {
                 register_key.value = true
