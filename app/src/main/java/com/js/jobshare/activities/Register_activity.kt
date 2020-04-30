@@ -12,6 +12,7 @@ import com.js.jobshare.R
 import com.js.jobshare.models.User
 import com.js.jobshare.viewmodels.ViewModelMain
 import kotlinx.android.synthetic.main.register_activity.*
+import org.koin.android.ext.android.get
 
 class Register_activity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class Register_activity : AppCompatActivity() {
 
         viewmodel.register_key.observe(this, object : Observer<Boolean> {
             override fun onChanged(t: Boolean?) {
-                if(t!!){
+                if (t!!) {
                     register_progress.visibility = View.GONE
 
                     Toast.makeText(
@@ -44,7 +45,7 @@ class Register_activity : AppCompatActivity() {
 
                     startActivity(intent)
                     finish()
-                }else{
+                } else {
                     register_progress.visibility = View.GONE
                     Toast.makeText(
                         context,
@@ -61,7 +62,7 @@ class Register_activity : AppCompatActivity() {
 
             register_progress.visibility = View.VISIBLE
 
-            val user = User()
+            val user = get<User>()
             user.name = edit_reg_name.text.toString()
             user.email = edit_reg_userEmail.text.toString()
             user.password = edit_reg_PassWord.text.toString()

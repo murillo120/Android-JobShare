@@ -13,13 +13,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.js.jobshare.R
 import com.js.jobshare.viewmodels.ViewModelMain
 import kotlinx.android.synthetic.main.login_activity.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class Login_Activity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     val context = this
-    val viewmodel = ViewModelMain()
+    val viewmodel by viewModel<ViewModelMain>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

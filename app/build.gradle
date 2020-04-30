@@ -49,10 +49,8 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:1.0.0-beta2"
 
-    implementation "org.koin:koin-core:2.1.5"
-
-// Koin Extended & experimental features
-    implementation "org.koin:koin-core-ext:2.1.5"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.5"
+    implementation "org.koin:koin-android:2.0.1"
 
 // Koin for Unit tests
     testImplementation "org.koin:koin-test:2.1.5"

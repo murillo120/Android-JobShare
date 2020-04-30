@@ -8,8 +8,12 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.js.jobshare.R
+import com.js.jobshare.appModule
+import com.js.jobshare.modelzModule
 import com.js.jobshare.viewmodels.ViewModelMain
-import kotlinx.android.synthetic.main.login_activity.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.context.startKoin
 
 class Splash_Acitivty : AppCompatActivity() {
 
@@ -17,7 +21,12 @@ class Splash_Acitivty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        val viewmodel = ViewModelMain()
+        startKoin {
+            androidContext(this@Splash_Acitivty)
+            modules(listOf(appModule, modelzModule))
+        }
+
+        val viewmodel = getViewModel<ViewModelMain>()
 
         val handler = Handler()
 
