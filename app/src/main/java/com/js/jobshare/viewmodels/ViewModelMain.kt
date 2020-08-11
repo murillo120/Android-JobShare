@@ -5,11 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.js.jobshare.models.Job
 import com.js.jobshare.models.User
 
 class ViewModelMain : ViewModel() {
 
     var user = MutableLiveData<User>()
+    val jobtest = MutableLiveData<ArrayList<Job>?>()
     val login_key = MutableLiveData<Boolean>()
     val register_key = MutableLiveData<Boolean>()
     val authentication = FirebaseAuth.getInstance()
@@ -75,6 +77,34 @@ class ViewModelMain : ViewModel() {
                     }
 
                 }
+            }
+
+        })
+    }
+
+    fun getJobFeed() {
+        val query: Query
+
+        query = database.child("jobs")
+
+        query.addValueEventListener(object : ValueEventListener {
+
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+
+                var list = ArrayList<Job>()
+
+                p0.children.forEach {
+                    Log.d("abacaxi", "onDataChange: ${it.getValue(Job::class.java)}")
+
+                    list.add(it.getValue(Job::class.java)!!)
+
+                }
+
+                jobtest.value = list
             }
 
         })

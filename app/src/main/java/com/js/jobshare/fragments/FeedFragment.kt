@@ -6,18 +6,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.js.jobshare.R
-import kotlinx.android.synthetic.main.fragment_feed.*
+import com.js.jobshare.models.Job
+import com.js.jobshare.viewmodels.ViewModelMain
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FeedFragment : Fragment() {
 
+    val viewmodel by viewModel<ViewModelMain>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewmodel.jobtest.observe(this, object : Observer<ArrayList<Job>?> {
+            override fun onChanged(t: ArrayList<Job>?) {
+                Log.d("abacaxi", "onChanged: ${t!![0].toString()} ")
+            }
+
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tv_pessoal_lermais.text = "ver mais"
+
+        viewmodel.getJobFeed()
 
     }
 
@@ -31,30 +44,5 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
-
-
-
-
-
-
-//        if (test.maxLines >= 4) {
-//            tv_pessoal_lermais.setOnClickListener {
-//                Log.d("abacaxi", "joga esse rabetao")
-//                Log.d("abacaxi", test.maxLines.toString())
-//                Log.d("abacaxi", test.lineCount.toString())
-//                if (test.maxLines <= 4) {
-//                    test.setLines(test.lineCount)
-//
-//                    tv_pessoal_lermais.text = "ler menos"
-//                } else {
-//                    test.setLines(4)
-//                    tv_pessoal_lermais.text = "ler mais"
-//                    test.text = "${test.text}..."
-//                }
-//            }
-//        }
     }
 }

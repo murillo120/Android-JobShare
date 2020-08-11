@@ -7,6 +7,7 @@ class User(
     var cargo: String = "",
     var idade: String = "",
     var phone: String = "",
+    var type: String = "",
     var adress: Adress? = null
 ) {
 

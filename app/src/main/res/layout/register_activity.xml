@@ -24,7 +24,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/main_loginCard"
         android:layout_width="335dp"
-        android:layout_height="391dp"
+        android:layout_height="400dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -113,9 +113,36 @@
                 android:text="Register"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.887"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_reg_PassWord"
-                app:layout_constraintVertical_bias="0.717" />
+                app:layout_constraintVertical_bias="0.578" />
+
+            <Switch
+                android:id="@+id/userType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Company"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_reg_PassWord" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:text="Employee"
+                android:textColor="#020202"
+                android:textColorHighlight="#000000"
+                android:textColorLink="#000000"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_register"
+                app:layout_constraintTop_toBottomOf="@+id/edit_reg_PassWord" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

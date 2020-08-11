@@ -67,7 +67,11 @@ class Register_activity : AppCompatActivity() {
             user.email = edit_reg_userEmail.text.toString()
             user.password = edit_reg_PassWord.text.toString()
 
-
+            if (userType.isChecked) {
+                user.type = "employee"
+            } else {
+                user.type = "company"
+            }
 
             viewmodel.executeRegisterOnApplication(user)
 
