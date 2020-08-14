@@ -44,6 +44,8 @@ class Home_activity : AppCompatActivity() {
                         .show()
                 }
 
+                userinfo?.setUserData(user)
+
             }
 
         })
@@ -75,6 +77,8 @@ class Home_activity : AppCompatActivity() {
     fun init() {
 
         val userdata = intent.getStringExtra("userdata")
+
+        Log.d("abacaxi", userdata)
 
         viewmodel.getUserdata(userdata)
     }

@@ -14,10 +14,11 @@ class ViewModelMain : ViewModel() {
     val jobtest = MutableLiveData<ArrayList<Job>?>()
     val login_key = MutableLiveData<Boolean>()
     val register_key = MutableLiveData<Boolean>()
+    val update_key = MutableLiveData<Boolean>()
     val authentication = FirebaseAuth.getInstance()
     val database = FirebaseDatabase.getInstance().getReference("root")
 
-    var exception:String? = null
+    var exception: String? = null
 
 
     fun executeLoginToHome(email: String, password: String) {
@@ -41,37 +42,42 @@ class ViewModelMain : ViewModel() {
         authentication.createUserWithEmailAndPassword(user.email, user.password)
                 .addOnCompleteListener { task ->
 
-            if (task.isSuccessful) {
-                register_key.value = true
+                    if (task.isSuccessful) {
+                        register_key.value = true
 
-                database.child("users").push().setValue(user)
+                        database.child("users").push().setValue(user)
 
-                return@addOnCompleteListener
-            }
-            exception = task.exception?.message
-            Log.d("abacaxi", task.exception?.message)
-            register_key.value = false
 
-        }
+                        return@addOnCompleteListener
+                    }
+                    exception = task.exception?.message
+                    Log.d("abacaxi", task.exception?.message)
+                    register_key.value = false
+
+                }
     }
 
-    fun getUserdata(userEmail:String){
+    fun getUserdata(userEmail: String) {
 
         val query: Query
 
         query = database.child("users")
-        
+
+
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
             override fun onDataChange(data: DataSnapshot) {
-                if (data.exists()){
+                if (data.exists()) {
                     val userr = data.children
                     userr.forEach {
-                        if (it.getValue(User::class.java)?.email == userEmail){
-                            user.value = it.getValue(User::class.java)
+                        if (it.getValue(User::class.java)?.email == userEmail) {
+                            val currentUser = it.getValue(User::class.java)
+                            currentUser?.key = it.key
+                            Log.d("abacaxi",currentUser?.key)
+                            user.value = currentUser
                             return@forEach
                         }
                     }
@@ -80,6 +86,21 @@ class ViewModelMain : ViewModel() {
             }
 
         })
+    }
+
+    fun registerJob() {
+
+        val job = Job()
+
+        job.companyImg = "https://www.seebmacae.com.br/tim.php?src=uploads/images/2018/06/caso-santander-mostra-que-bancos-tem-mais-vantagens-no-brasil-1528375565.jpg&w=1600&h=800"
+        job.companyName = "Banco Santander"
+        job.description = "Atuar Nas Rotinas Das Áreas Administrativa e Financeira Com • Fornecedores: pagamento/ recebimentos • Fluxo de Caixa; • Operações de câmbio."
+        job.title = "Analista Financeiro III"
+        job.salario = 6000.0
+        job.nivel = "Senior"
+
+        database.child("jobs").push().setValue(job)
+
     }
 
     fun getJobFeed() {
@@ -109,6 +130,20 @@ class ViewModelMain : ViewModel() {
 
         })
 
+
+    }
+
+    fun updateUserDataOnFirebase(user: User) {
+
+        val query: Query
+
+        val postValues = user.toMap(user)
+
+        Log.d("abacaxi", user.key)
+
+        query = database.child("users").child(user.key!!)
+
+        query.updateChildren(postValues)
 
     }
 

@@ -60,22 +60,24 @@ class Register_activity : AppCompatActivity() {
 
         btn_register.setOnClickListener {
 
-            register_progress.visibility = View.VISIBLE
-
-            val user = get<User>()
-            user.name = edit_reg_name.text.toString()
-            user.email = edit_reg_userEmail.text.toString()
-            user.password = edit_reg_PassWord.text.toString()
-
-            if (userType.isChecked) {
-                user.type = "employee"
-            } else {
-                user.type = "company"
-            }
-
-            viewmodel.executeRegisterOnApplication(user)
-
-
+            viewmodel.registerJob()
+//
+//            register_progress.visibility = View.VISIBLE
+//
+//            val user = get<User>()
+//            user.name = edit_reg_name.text.toString()
+//            user.email = edit_reg_userEmail.text.toString()
+//            user.password = edit_reg_PassWord.text.toString()
+//
+//            if (userType.isChecked) {
+//                user.type = "employee"
+//            } else {
+//                user.type = "company"
+//            }
+//
+//            viewmodel.executeRegisterOnApplication(user)
+//
+//
         }
     }
 }

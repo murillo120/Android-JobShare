@@ -90,8 +90,8 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/home_view_pager"
-        android:layout_width="410dp"
-        android:layout_height="593dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/home_tab_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

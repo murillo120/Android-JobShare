@@ -1,5 +1,6 @@
 package com.js.jobshare
 
+import com.js.jobshare.models.Job
 import com.js.jobshare.models.User
 import com.js.jobshare.viewmodels.ViewModelMain
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -11,4 +12,5 @@ val appModule = module {
 
 val modelzModule = module {
     factory { User() }
+    factory { Job() }
 }
