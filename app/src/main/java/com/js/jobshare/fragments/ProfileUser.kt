@@ -8,24 +8,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.js.jobshare.R
-import com.js.jobshare.activities.Home_activity
+import com.js.jobshare.activities.HomeActivity
 import com.js.jobshare.models.User
-import com.js.jobshare.viewmodels.ViewModelMain
+import com.js.jobshare.viewmodels.ViewModelUser
 import kotlinx.android.synthetic.main.fragment_profile_user.*
-import kotlinx.android.synthetic.main.fragment_profile_user.view.*
 
 
 class profile_user : Fragment() {
 
     var currentUser: User? = null
-    val viewModel = ViewModelMain()
+    val viewModel = ViewModelUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d("abacaxi", "veio aqui");
 
-        (activity as Home_activity).passData(object : DataThorughInferface {
+        (activity as HomeActivity).passData(object : DataThorughInferface {
             override fun setUserData(user: User?) {
                 currentUser = user
                 verifyData(currentUser)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.js.jobshare.R
+import com.js.jobshare.extensions.toBrazilianCurrency
 import com.js.jobshare.models.Job
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cel_job_post.view.*
@@ -31,7 +32,7 @@ class OportunnitiesAdapter(val oportunnitiesList: ArrayList<Job>, val context: C
         Picasso.get().load(jobItem.companyImg).into(holder.companyImg)
         holder.companyName.text = jobItem.companyName
         holder.oportunnityTitle.text = jobItem.title
-        holder.oportunnitySalary.text = "R$${jobItem.salario.toString()}"
+        holder.oportunnitySalary.text = jobItem.salario.toBrazilianCurrency()
         holder.oportunnityDescription.text = jobItem.description
         holder.oportunnityLevel.text = jobItem.nivel
     }

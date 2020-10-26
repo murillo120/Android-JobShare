@@ -2,22 +2,19 @@ package com.js.jobshare.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.js.jobshare.R
-import com.js.jobshare.models.User
-import com.js.jobshare.viewmodels.ViewModelMain
+import com.js.jobshare.viewmodels.ViewModelUser
 import kotlinx.android.synthetic.main.register_activity.*
-import org.koin.android.ext.android.get
 
-class Register_activity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private val context = this
-    private val viewmodel = ViewModelMain()
+    private val viewmodel = ViewModelUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +38,7 @@ class Register_activity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    val intent = Intent(context, Login_Activity::class.java)
+                    val intent = Intent(context, LoginActivity::class.java)
 
                     startActivity(intent)
                     finish()

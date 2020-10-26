@@ -1,24 +1,22 @@
 package com.js.jobshare.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.js.jobshare.R
 import com.js.jobshare.adapters.PageAdapter
 import com.js.jobshare.fragments.DataThorughInferface
-import com.js.jobshare.models.User
-import com.js.jobshare.viewmodels.ViewModelMain
+import com.js.jobshare.viewmodels.ViewModelUser
 import kotlinx.android.synthetic.main.home_activity.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class Home_activity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
-    val viewmodel by viewModel<ViewModelMain>()
+    val viewmodel by viewModel<ViewModelUser>()
     val context = this
     var userinfo: DataThorughInferface? = null
 
@@ -26,29 +24,28 @@ class Home_activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
-        viewmodel.user.observe(this, object : Observer<User> {
-            override fun onChanged(user: User?) {
-                home_username.text = getString(R.string.hello_user, user?.name)
+        viewmodel.user.observe(this,
+            Observer<FirebaseUser> { user ->
+                home_username.text = getString(R.string.hello_user, user.displayName)
 
-                if (user?.adress == null) {
 
-                    AlertDialog.Builder(context)
-                        .setTitle("Importante!")
-                        .setMessage("Você precisa atualizar suas informações pessoais!")
-                        .setNeutralButton("atualizar", object : DialogInterface.OnClickListener {
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                                home_view_pager.currentItem = 1
-                                userinfo?.setUserData(user)
-                            }
-                        })
-                        .show()
-                }
 
-                userinfo?.setUserData(user)
-
-            }
-
-        })
+//                if (user?.adress == null) {
+//
+//                    AlertDialog.Builder(context)
+//                        .setTitle("Importante!")
+//                        .setMessage("Você precisa atualizar suas informações pessoais!")
+//                        .setNeutralButton("atualizar", object : DialogInterface.OnClickListener {
+//                            override fun onClick(dialog: DialogInterface?, which: Int) {
+//                                home_view_pager.currentItem = 1
+//                                userinfo?.setUserData(user)
+//                            }
+//                        })
+//                        .show()
+//                }
+//
+//                userinfo?.setUserData(user)
+            })
 
         val window = this.window
 
@@ -66,7 +63,7 @@ class Home_activity : AppCompatActivity() {
         home_logout_button.setOnClickListener {
 
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(context, Login_Activity::class.java))
+            startActivity(Intent(context, LoginActivity::class.java))
             finish()
 
         }
@@ -77,10 +74,7 @@ class Home_activity : AppCompatActivity() {
     fun init() {
 
         val userdata = intent.getStringExtra("userdata")
-
         Log.d("abacaxi", userdata)
-
-        viewmodel.getUserdata(userdata)
     }
 
     fun passData(userData: DataThorughInferface) {

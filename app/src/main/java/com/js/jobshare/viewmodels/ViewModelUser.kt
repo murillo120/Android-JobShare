@@ -4,13 +4,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.js.jobshare.models.Job
 import com.js.jobshare.models.User
 
-class ViewModelMain : ViewModel() {
+class ViewModelUser : ViewModel() {
 
-    var user = MutableLiveData<User>()
+    var user = MutableLiveData<FirebaseUser>()
     val jobtest = MutableLiveData<ArrayList<Job>?>()
     val login_key = MutableLiveData<Boolean>()
     val register_key = MutableLiveData<Boolean>()
@@ -26,6 +27,7 @@ class ViewModelMain : ViewModel() {
         authentication.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
 
             if (task.isSuccessful) {
+                user.value = authentication.currentUser
                 login_key.value = true
 
                 return@addOnCompleteListener
@@ -44,7 +46,6 @@ class ViewModelMain : ViewModel() {
 
                     if (task.isSuccessful) {
                         register_key.value = true
-
                         database.child("users").push().setValue(user)
 
 
@@ -57,36 +58,6 @@ class ViewModelMain : ViewModel() {
                 }
     }
 
-    fun getUserdata(userEmail: String) {
-
-        val query: Query
-
-        query = database.child("users")
-
-
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(data: DataSnapshot) {
-                if (data.exists()) {
-                    val userr = data.children
-                    userr.forEach {
-                        if (it.getValue(User::class.java)?.email == userEmail) {
-                            val currentUser = it.getValue(User::class.java)
-                            currentUser?.key = it.key
-                            Log.d("abacaxi",currentUser?.key)
-                            user.value = currentUser
-                            return@forEach
-                        }
-                    }
-
-                }
-            }
-
-        })
-    }
 
     fun registerJob() {
 

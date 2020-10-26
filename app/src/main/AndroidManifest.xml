@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.Splash_Acitivty"
+            android:name=".activities.SplashAcitivty"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Home_activity"  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activities.Register_activity" />
-        <activity android:name=".activities.Login_Activity"  android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activities.HomeActivity"  android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity"  android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

@@ -10,23 +10,23 @@ import androidx.lifecycle.Observer
 import com.js.jobshare.R
 import com.js.jobshare.appModule
 import com.js.jobshare.modelzModule
-import com.js.jobshare.viewmodels.ViewModelMain
+import com.js.jobshare.viewmodels.ViewModelUser
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.context.startKoin
 
-class Splash_Acitivty : AppCompatActivity() {
+class SplashAcitivty : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
         startKoin {
-            androidContext(this@Splash_Acitivty)
+            androidContext(this@SplashAcitivty)
             modules(listOf(appModule, modelzModule))
         }
 
-        val viewmodel = getViewModel<ViewModelMain>()
+        val viewmodel = getViewModel<ViewModelUser>()
 
         val handler = Handler()
 
@@ -39,12 +39,12 @@ class Splash_Acitivty : AppCompatActivity() {
                 val savedUser = sharedPreference.getString("username", null);
                 val savedPass = sharedPreference.getString("password", null);
 
-                viewmodel.login_key.observe(this@Splash_Acitivty, Observer<Boolean> { works ->
+                viewmodel.login_key.observe(this@SplashAcitivty, Observer<Boolean> { works ->
                     if (works) {
 
                         val loggedintent: Intent?
 
-                        loggedintent = Intent(applicationContext, Home_activity::class.java)
+                        loggedintent = Intent(applicationContext, HomeActivity::class.java)
                         loggedintent.putExtra("userdata", savedUser)
 
                         startActivity(loggedintent)
@@ -59,7 +59,7 @@ class Splash_Acitivty : AppCompatActivity() {
                     return
                 } else {
                     Log.d("abacaxi", "no infos on shared Prefs")
-                    intent = Intent(applicationContext, Login_Activity::class.java)
+                    intent = Intent(applicationContext, LoginActivity::class.java)
                 }
 
                 startActivity(intent)
